@@ -70,9 +70,6 @@ app.get('/:pgno',function (req,res){
     res.send(createtemplate(pgs[pgno]));
 });
 
-app.get('/pg2',function (req,res){
-    res.sendFile(path.join(__dirname,'ui','pg2.html'));
-});
     
 app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
