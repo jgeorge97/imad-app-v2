@@ -13,7 +13,8 @@ app.get('/pg1',function (req,res){
 });
 
 app.get('/pg2',function (req,res){
-    res.send("Page 2 will be loaded here!!");});
+    res.sendFile(path.join(__dirname,'ui','pg2.html'));
+});
     
 app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
