@@ -5,17 +5,31 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
-var pg1 = {
-    title:'Page 1 | George Jose',
-    heading:'Page 1',
-    date:'Mar 17 2017',
-    content: `<p>Hello World.</p>
-                
-                <p>My name is George Jose</p>
-                
-                <p>I am into Coding eventhough I'm a bit lazy.</p>`
+var pgs={
+        pg1: {
+        title:'Page 1 | George Jose',
+        heading:'Page 1',
+        date:'Mar 17 2017',
+        content: `<p>Hello World.</p>
+                    
+                    <p>My name is George Jose</p>
+                    
+                    <p>I am into Coding eventhough I'm a bit lazy.</p>`
+                },
+    
+    pg2: {
+        title:'Page 2 | George Jose',
+        heading:'Page 2',
+        date:'Mar 17 2017',
+        content: `<p>Hello World.</p>
+                    
+            <p>I am 19 years old and I live in Kerala</p>
+            
+            <p>I study Computer Science and Engineering in College of Engineering Cherthala.</p>`
+        
+        
+    }
 };
-
 
 function createtemplate(data){
     
@@ -51,8 +65,9 @@ function createtemplate(data){
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
-app.get('/pg1',function (req,res){
-    res.send(createtemplate(pg1));
+app.get('/:pgno',function (req,res){
+    var pgno=req.params.pgno;
+    res.send(createtemplate(pgs[pgno]));
 });
 
 app.get('/pg2',function (req,res){
