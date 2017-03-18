@@ -5,11 +5,54 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
+var pg1 = {
+    title:'Page 1 | George Jose',
+    heading:'Page 1',
+    date:'Mar 17 2017',
+    content: `<p>Hello World.</p>
+                
+                <p>My name is George Jose</p>
+                
+                <p>I am into Coding eventhough I'm a bit lazy.</p>`
+};
+
+
+function createtemplate(data){
+    
+            var title=data.title;
+            var date=data.date;
+            var heading=data.heading;
+            var content=data.content;
+            var template=`<!DOCTYPE html>
+            <html>
+                <head>
+                    <title>${title}</title>
+                    <meta name="viewport" content="width=device-width, initial-scale=1" />
+                    <link href="/ui/style.css" rel="stylesheet" />
+                </head>
+                <body>
+                    <div>
+                        <a href='/'>Home</a>
+                    </div>
+                    <hr/>
+                    <div class="box">
+                        <h4>${heading}</h4>
+                        <div>${date}</div>
+                        <div>
+                           ${content}
+                        </div>
+                    </div>
+                </body>
+            </html>
+`;
+    return template;
+}
+
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 app.get('/pg1',function (req,res){
-    res.sendFile(path.join(__dirname,'ui','pg1.html'));
+    res.send(createtemplate(pg1));
 });
 
 app.get('/pg2',function (req,res){
